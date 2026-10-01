@@ -1,0 +1,22 @@
+{
+  "name": "@vk-tools/mcp-server",
+  "version": "1.0.0",
+  "description": "Frontend MCP Server for VK.Blocks rules and module context",
+  "type": "module",
+  "bin": {
+    "vk-fe-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "start": "node ./dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.6.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  }
+}
