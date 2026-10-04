@@ -1,7 +1,11 @@
 // [MB.02] Explicit barrel export
-export type { VKIdGenerator } from './vk-id-generator.js';
-export { defaultIdGenerator } from './vk-id-generator.js';
-export type { VKTimeProvider } from './vk-time-provider.js';
-export { defaultTimeProvider } from './vk-time-provider.js';
-export type { VKSerializer, VKSerializerOptions } from './vk-serializer.js';
-export { defaultSerializer, createVKSerializer } from './vk-serializer.js';
+export type {
+  VKIdGenerator,
+  VKTimeProvider,
+  VKSerializer,
+  VKSerializerOptions,
+} from './abstractions.types.js';
+export { defaultIdGenerator } from './default-id-generator.js';
+export { defaultTimeProvider } from './default-time-provider.js';
+export { createVKSerializer } from './create-vk-serializer.js';
+export { defaultSerializer } from './default-serializer.js';
