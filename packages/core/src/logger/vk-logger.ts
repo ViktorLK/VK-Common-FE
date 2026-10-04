@@ -25,9 +25,4 @@ export interface VKLoggerConfig {
   readonly sink?: (level: VKLogLevel, message: string, payload: Readonly<Record<string, unknown>>) => void;
 }
 
-// Factory function will be exported from here, using the internal console logger for now
-import { ConsoleLogger } from './_internal/console-logger.js';
 
-export function createVKLogger(config?: VKLoggerConfig): VKLogger {
-  return new ConsoleLogger(config);
-}

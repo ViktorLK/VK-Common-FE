@@ -1,7 +1,7 @@
 // [OR.01] Structured logger implementation
 // [CS.06] Deterministic timestamps via VKTimeProvider
 // [CS.07] Safe environment check without raw process.env reliance
-import { VKLogger, VKLogContext, VKLoggerConfig, VKLogLevel } from '../vk-logger.js';
+import type { VKLogger, VKLogContext, VKLoggerConfig, VKLogLevel } from '../vk-logger.js';
 import { defaultTimeProvider, VKTimeProvider } from '../../abstractions/vk-time-provider.js';
 
 const LogLevels: Record<VKLogLevel, number> = {
