@@ -4,10 +4,16 @@ export interface VKIdGenerator {
   readonly generate: () => string;
 }
 
-export interface VKTimeProvider {
+export interface VKClock {
   readonly now: () => Date;
   readonly timestamp: () => number;
 }
+
+/**
+ * @deprecated Use VKClock instead per naming convention.
+ */
+export type VKTimeProvider = VKClock;
+
 
 export interface VKSerializerOptions {
   readonly reviveDates?: boolean;
