@@ -11,7 +11,16 @@ export { defaultTimeProvider } from './default-time-provider.js';
 export { defaultClock, createSettableClock, type VKTestClock } from './vk-clock.js';
 export { createVKSerializer } from './create-vk-serializer.js';
 export { defaultSerializer } from './default-serializer.js';
-export { vkSafeJson, vkSafeJsonStringify, type VKSafeJson } from './vk-safe-json.js';
+export { vkSafeJson, vkSafeJsonStringify, vkSafeJsonParse, type VKSafeJson } from './vk-safe-json.js';
 export type { VKTokenProvider } from './vk-token-provider.js';
+export {
+  VKFlightErrorCodes,
+  isFlightSerializable,
+  assertFlightSerializable,
+  tryAssertFlightSerializable,
+  vkIsFlightSerializable,
+  vkAssertFlightSerializable,
+  vkTryAssertFlightSerializable,
+} from './flight-serializable.js';
 
 
