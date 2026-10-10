@@ -3,6 +3,9 @@ import { DEFAULT_REDACT_KEYS } from './logger.constants.js';
 
 const BEARER_REGEX = /Bearer\s+([A-Za-z0-9\-._~+/]+=*)/gi;
 const JWT_REGEX = /\beyJ[a-zA-Z0-9_-]{5,}\.[a-zA-Z0-9_-]{5,}\.[a-zA-Z0-9_-]{5,}\b/g;
+const PRIVATE_KEY_REGEX = /-----BEGIN [A-Z ]*PRIVATE KEY-----[\s\S]*?-----END [A-Z ]*PRIVATE KEY-----/gi;
+const CREDIT_CARD_REGEX = /\b(?:\d{4}[ -]){3}\d{4}\b|\b\d{15,16}\b/g;
+const PHONE_REGEX = /(?:\b\+?[1-9]\d{0,2}[-.\s]?)?(?:\(?\d{2,4}\)?[-.\s]?)\d{3,4}[-.\s]?\d{4}\b/g;
 
 /**
  * Normalizes sensitive key names to lowercase alphanumeric only.
@@ -31,6 +34,9 @@ export function redact<T>(
     if (typeof val === 'string') {
       let str = val.replace(BEARER_REGEX, 'Bearer [REDACTED]');
       str = str.replace(JWT_REGEX, '[REDACTED_JWT]');
+      str = str.replace(PRIVATE_KEY_REGEX, '[REDACTED_KEY]');
+      str = str.replace(CREDIT_CARD_REGEX, '[REDACTED_CARD]');
+      str = str.replace(PHONE_REGEX, '[REDACTED_PHONE]');
       if (customPatterns) {
         for (const pattern of customPatterns) {
           str = str.replace(pattern, '[REDACTED]');
@@ -74,3 +80,9 @@ export function redact<T>(
 
   return sanitize(input) as T;
 }
+
+/**
+ * Alias conforming to VK prefix convention (Item 31).
+ */
+export const vkRedact = redact;
+

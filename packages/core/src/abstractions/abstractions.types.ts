@@ -17,6 +17,7 @@ export type VKTimeProvider = VKClock;
 
 export interface VKSerializerOptions {
   readonly reviveDates?: boolean;
+  readonly reviveCustomTypes?: boolean;
   readonly replacer?: (key: string, value: unknown) => unknown;
   readonly reviver?: (key: string, value: unknown) => unknown;
 }
