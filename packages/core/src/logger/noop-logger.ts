@@ -8,3 +8,9 @@ export const noopLogger: VKLogger = {
   error: () => {},
   child: () => noopLogger,
 };
+
+/**
+ * Alias conforming to VK prefix convention (Item 30).
+ */
+export const vkNoopLogger: VKLogger = noopLogger;
+

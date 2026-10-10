@@ -1,18 +1,19 @@
 // [MB.02] Explicit barrel export
-export { VKErrorType } from './vk-error-type.js';
-export { VKError } from './vk-error.js';
-export { VKResult } from './vk-result.js';
-export type { VKVoidResult } from './vk-result.js';
+export { VKResult, type VKVoidResult } from './vk-result.js';
 export {
-  map,
-  bind,
-  tap,
-  match,
-  ensure,
-  mapError,
-  mapAsync,
-  bindAsync,
-  tapAsync,
-  tryCatch,
-  tryCatchAsync,
-} from './vk-result-extensions.js';
+  vkOk,
+  vkErr,
+  vkIsOk,
+  vkIsErr,
+  vkFromPromise,
+  vkUnwrapOrThrow,
+} from './result-constructors.js';
+export type {
+  VKOk,
+  VKErr,
+  VKVoidOk,
+  VKVoidErr,
+  VKEither,
+} from './result.types.js';
+export { VKResultErrorCodes } from './result.errors.js';
+

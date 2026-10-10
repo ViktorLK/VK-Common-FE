@@ -13,4 +13,14 @@ export const DEFAULT_REDACT_KEYS: readonly string[] = [
   'refreshtoken',
   'clientsecret',
   'creditcard',
+  'cardnumber',
+  'cvv',
+  'cvc',
+  'ssn',
+  'idcard',
+  'phonenumber',
+  'mobile',
+  'telephone',
+  'privatekey',
 ] as const;
+

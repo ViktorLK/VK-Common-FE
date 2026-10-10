@@ -5,6 +5,8 @@ export { VKGuidErrorCodes } from './guids.errors.js';
 export { createUuidV4 } from './create-uuid-v4.js';
 export { createUuidV7 } from './create-uuid-v7.js';
 export { isValidGuid } from './is-valid-guid.js';
+export { vkParseGuid } from './vk-parse-guid.js';
+
 export {
   DefaultGuidGenerator,
   createVKGuidGenerator,

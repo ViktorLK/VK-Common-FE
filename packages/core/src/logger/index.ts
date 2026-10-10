@@ -8,5 +8,6 @@ export type {
 } from './logger.types.js';
 export { DEFAULT_LOG_LEVEL, DEFAULT_REDACT_KEYS } from './logger.constants.js';
 export { createVKLogger } from './create-vk-logger.js';
-export { noopLogger } from './noop-logger.js';
-export { redact } from './redact.js';
+export { noopLogger, vkNoopLogger } from './noop-logger.js';
+export { redact, vkRedact } from './redact.js';
+
