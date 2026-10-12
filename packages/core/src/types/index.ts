@@ -1,9 +1,30 @@
-// [MB.02] Explicit barrel export
-export type { Branded } from './branded.js';
-export type { Nullable, Optional, DeepReadonly } from './common.js';
 export type {
-  VKPagedResponse,
+  VKBrand,
+  Brand,
+  VKTenantId,
+  VKUserId,
+  VKCorrelationId,
+  VKNonEmptyArray,
+  NonEmptyArray,
+  VKAwaitable,
+  Awaitable,
+  VKPrettify,
+  Prettify,
+  VKNullable,
+  Nullable,
+  VKOptional,
+  Optional,
+  VKDeepReadonly,
+  DeepReadonly,
+  VKPagedResult,
   VKPagedRequest,
-  VKCursorPagedResponse,
+  VKCursorPagedResult,
   VKCursorPagedRequest,
-} from './pagination.js';
+} from './types.types.js';
+
+export {
+  vkBrand,
+  vkAssertBrand,
+} from './brand-helpers.js';
+export type { VKInferRouteParams } from './brand-helpers.js';
+

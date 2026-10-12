@@ -2,6 +2,7 @@
 import type { VKLogger } from './logger.types.js';
 
 export const noopLogger: VKLogger = {
+  trace: () => {},
   debug: () => {},
   info: () => {},
   warn: () => {},

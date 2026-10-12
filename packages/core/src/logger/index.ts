@@ -5,6 +5,7 @@ export type {
   VKLoggerConfig,
   VKLogLevel,
   VKLoggerSink,
+  VKLogMessage,
 } from './logger.types.js';
 export { DEFAULT_LOG_LEVEL, DEFAULT_REDACT_KEYS } from './logger.constants.js';
 export { createVKLogger } from './create-vk-logger.js';
