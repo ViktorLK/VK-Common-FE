@@ -1,7 +1,9 @@
 // [OR.01] Structured logger contracts
 import type { VKTimeProvider } from '../abstractions/abstractions.types.js';
 
-export type VKLogLevel = 'debug' | 'info' | 'warn' | 'error';
+export type VKLogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error';
+
+export type VKLogMessage = string | (() => string);
 
 export interface VKLogContext {
   readonly module: string;
@@ -17,10 +19,11 @@ export type VKLoggerSink = (
 ) => void;
 
 export interface VKLogger {
-  readonly debug: (message: string, context?: Partial<VKLogContext>) => void;
-  readonly info: (message: string, context?: Partial<VKLogContext>) => void;
-  readonly warn: (message: string, context?: Partial<VKLogContext>) => void;
-  readonly error: (message: string, context?: Partial<VKLogContext>, error?: unknown) => void;
+  readonly trace: (message: VKLogMessage, context?: Partial<VKLogContext>) => void;
+  readonly debug: (message: VKLogMessage, context?: Partial<VKLogContext>) => void;
+  readonly info: (message: VKLogMessage, context?: Partial<VKLogContext>) => void;
+  readonly warn: (message: VKLogMessage, context?: Partial<VKLogContext>) => void;
+  readonly error: (message: VKLogMessage, context?: Partial<VKLogContext>, error?: unknown) => void;
   readonly child: (context: Partial<VKLogContext>) => VKLogger;
 }
 
@@ -30,4 +33,7 @@ export interface VKLoggerConfig {
   readonly timeProvider?: VKTimeProvider;
   readonly sink?: VKLoggerSink;
   readonly redactKeys?: readonly string[];
+  readonly namespaces?: string;
+  readonly defaultToNoOpInProduction?: boolean;
 }
+

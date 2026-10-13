@@ -38,4 +38,6 @@ export const VKCoreErrorCodes = {
   ServiceUnavailable: 'Core.ServiceUnavailable',
   AssertionFailed: 'Core.AssertionFailed',
   ExecutionError: 'Core.ExecutionError',
+  UnsupportedEnvironment: 'Core.UnsupportedEnvironment',
+  DesktopNotAvailable: 'Core.DesktopNotAvailable',
 } as const;
