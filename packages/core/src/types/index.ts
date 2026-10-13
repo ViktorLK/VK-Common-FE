@@ -28,3 +28,11 @@ export {
 } from './brand-helpers.js';
 export type { VKInferRouteParams } from './brand-helpers.js';
 
+export type {
+  VKUnwrapPromise,
+  VKInferReturn,
+  VKInferParams,
+  VKDeepPick,
+  VKNarrowRecord,
+} from './type-inference.js';
+
