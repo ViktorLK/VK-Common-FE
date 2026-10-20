@@ -4,12 +4,12 @@ import {
   VKResult,
   vkAssert,
 } from '@vk-blocks/core';
-import {
+import type {
   VKHttpClient,
   VKHttpClientConfig,
   VKRequestOptions,
-  createVKHttpClient,
-} from '@vk-blocks/http';
+} from './vk-http-client.js';
+import { createVKHttpClient } from './vk-http-client-factory.js';
 import { mapZodErrorToVKErrors } from '../validation/zod-mapper.js';
 import {
   VKApiMiddleware,
