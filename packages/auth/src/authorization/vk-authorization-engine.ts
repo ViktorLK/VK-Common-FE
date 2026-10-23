@@ -1,4 +1,5 @@
 import { VKAuthUser, VKPolicyHandler } from '../types/auth.js';
+import type { IVKAbility } from './ability.js';
 
 export interface AuthRequirement {
   readonly role?: string;
@@ -6,15 +7,51 @@ export interface AuthRequirement {
   readonly permission?: string;
   readonly permissions?: readonly string[];
   readonly policy?: string;
+  readonly action?: string;
+  readonly subject?: unknown;
   readonly requireAll?: boolean; // If true, requires all roles/permissions; default is true for roles/permissions array
 }
 
 /**
  * Enterprise Policy-based Authorization Engine.
- * Supports granular role validation, composite permission checks, and dynamic entity policies.
+ * Supports granular role validation, composite permission checks, dynamic entity policies,
+ * and isomorphic CASL-aligned Ability rules.
  */
 export class VKAuthorizationEngine {
   private readonly policies = new Map<string, VKPolicyHandler<any>>();
+  private ability: IVKAbility<string, any> | null = null;
+
+  /**
+   * Attaches an isomorphic IVKAbility rule set.
+   */
+  setAbility(ability: IVKAbility<string, any> | null): this {
+    this.ability = ability;
+    return this;
+  }
+
+  /**
+   * Returns currently attached ability rule set.
+   */
+  getAbility(): IVKAbility<string, any> | null {
+    return this.ability;
+  }
+
+  /**
+   * Checks whether the attached ability permits the action on the given subject.
+   */
+  can(action: string, subject: unknown): boolean {
+    if (this.ability) {
+      return this.ability.can(action, subject);
+    }
+    return false;
+  }
+
+  /**
+   * Checks whether the attached ability denies the action on the given subject.
+   */
+  cannot(action: string, subject: unknown): boolean {
+    return !this.can(action, subject);
+  }
 
   /**
    * Registers a custom policy rule.
@@ -114,6 +151,16 @@ export class VKAuthorizationEngine {
       if (!passes) return false;
     }
 
+    // Ability check
+    if (requirement.action) {
+      const targetSubject = requirement.subject !== undefined ? requirement.subject : resource;
+      if (targetSubject !== undefined) {
+        const passes = this.can(requirement.action, targetSubject);
+        if (!passes) return false;
+      }
+    }
+
     return true;
   }
 }
+
