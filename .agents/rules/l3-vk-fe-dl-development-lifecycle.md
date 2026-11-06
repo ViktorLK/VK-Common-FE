@@ -42,7 +42,7 @@ Interrupt the current flow and ask:
 > "⚠️ An architectural decision point has been detected.
 > Should I generate an ADR to record this decision before we continue?"
 
-If confirmed → generate an ADR in `docs/02-ArchitectureDecisionRecords/`.
+If confirmed → generate an ADR in `docs/04-ArchitectureDecisionRecords/{packageName}/`.
 Goal: Ensure _why this change was made_ is captured in real time, not reconstructed retroactively.
 
 ### DL.04 — Backlog Synchronization Trigger
@@ -59,7 +59,7 @@ Goal: Ensure _why this change was made_ is captured in real time, not reconstruc
 Interrupt the current flow and ask:
 
 > "⚠️ A potential backlog item (Technical Debt/Roadmap) has been detected.
-> Should I generate an atomic task in `docs/05-Backlogs/`?"
+> Should I generate an atomic task in `docs/07-Backlogs/`?"
 
 If confirmed → collect title, description, and module from context and create the backlog item.
 

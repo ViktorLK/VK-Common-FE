@@ -22,6 +22,7 @@ BASE-06 Radical YAGNI: Without a confirmed consumer, do not add abstractions, op
 BASE-07 Production-Grade Delivery: No pseudocode, placeholder stubs, or incomplete algorithms. Emitted code must compile and run. Behavior changes ship with tests. Bare TODO is prohibited; technical-debt markers must state a condition, e.g. `TODO[remove-after-source-gen]`.
 BASE-09 Language Convention: Identifiers, code, comments, and commit messages are written in English. Explanations and ADRs are written in Japanese.
 BASE-10 Surgical Change Discipline: Deliver the minimal diff that satisfies the specification; do not refactor unrelated code. If ambiguity arises, ask at most one clarifying question; otherwise state explicit assumptions and proceed. End every substantive response with the assumptions made and anything left unverified.
+BASE-11 Documentation Linking: Internal document links across directories MUST use repository-root-relative paths (`/docs/...`, `/packages/...`, `/.agents/...`). Upward relative paths (`../`) are prohibited; local `./` is permitted only within the same directory or below.
 BASE-12 Principles Over Signatures: Manifests and boundary documents state invariant principles and contracts, not transient method signatures.
 </rules>
 

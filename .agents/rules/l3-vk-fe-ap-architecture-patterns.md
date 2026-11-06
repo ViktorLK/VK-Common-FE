@@ -89,3 +89,14 @@ For service/utility implementations, use these semantic prefixes:
 - **Error Mapping**: API errors MUST be mapped to domain-level `VKError` objects at the client boundary. Components MUST NOT handle raw HTTP errors.
 - **Versioning**: API client modules MUST be version-aware. Breaking API changes REQUIRE an ADR (DL.03).
 - **Schema Validation**: ALL API responses SHOULD be validated against a Zod schema at the boundary. Trust but verify.
+
+### AP.06 — Explicit Configuration & Anti-Overprotection
+
+- **Anti-Overprotection / Fallback Rule**: Do NOT inject silent `Null/NoOp` fallbacks or mock contexts in React Providers, Hooks, or DI layers to mask developer configuration omissions. Missing mandatory configurations MUST fail fast (throw a descriptive Error during initialization / render per MB.03). Fallback registrations (e.g., `NoOpStorageAdapter`) are ONLY allowed to represent an explicit, documented "disabled" config state (e.g., `enabled: false`).
+- **No Heuristic Priority**: Do NOT guess whether a custom provider or adapter should take priority over the library's defaults based on heuristics or import order. Require explicit intent via props or provider configuration.
+- **Explicit Provider Overrides**: If a module supports custom implementations (e.g., custom HTTP client, custom TokenProvider, custom CacheAdapter), they MUST be exposed via explicit provider props or configuration factories.
+
+### AP.07 — Non-Intrusive Capability Boundary
+
+- **No Implicit Side-Effects**: Core packages (`@vk-blocks/core`, `@vk-blocks/ui`, `@vk-blocks/client-state`) MUST NOT implicitly create or persist domain state (e.g., in `localStorage`, `sessionStorage`, `IndexedDB`, or cookies) when request/component context lacks explicit identifiers or persistence adapters.
+- **App Ownership & Fallback**: Persistence and session lifecycles belong exclusively to the App layer. Omitted optional storage adapters MUST fallback smoothly to in-memory, stateless execution without error or side-effects.

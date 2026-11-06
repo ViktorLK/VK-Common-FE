@@ -29,12 +29,12 @@ An ADR is **MANDATORY** if the change:
 
 The `walkthrough.md` MUST verify the "Decision Traceability":
 
-- If an ADR was planned, the walkthrough MUST link to the newly created `.md` file in `docs/02-ArchitectureDecisionRecords/`.
+- If an ADR was planned, the walkthrough MUST link to the newly created `.md` file in `docs/04-ArchitectureDecisionRecords/{packageName}/`.
 - Failure to document a significant architectural shift is considered a violation of **DL.03**.
 
 ### PS.03 — RFC-First Policy (Top-Down Design)
 
-For any **Complex Feature** or **Experimental Logic** (e.g., novel component systems, complex state machines, real-time collaboration features), an RFC (Request for Comments) MUST be created in `docs/06-RFCs/` before any atomic tasks are added to the backlog.
+For any **Complex Feature** or **Experimental Logic** (e.g., novel component systems, complex state machines, real-time collaboration features), an RFC (Request for Comments) MUST be created in `docs/02-RFCs/` before any atomic tasks are added to the backlog.
 
 #### 1. RFC Core Components
 
@@ -45,21 +45,31 @@ For any **Complex Feature** or **Experimental Logic** (e.g., novel component sys
 
 #### 2. Workflow Integration
 
-1. **Draft RFC**: AI or User creates the proposal.
+1. **Draft RFC**: AI or User creates the proposal using `docs/00-Blueprints/02-RfcBlueprint.md`.
 2. **Approval**: User reviews and marks as `✅ Approved`.
-3. **Backlog Decomposition**: Once approved, the RFC is decomposed into multiple atomic tasks.
+3. **Backlog Decomposition**: Once approved, the RFC is decomposed into multiple atomic tasks using `vk_fe_add_backlog_item`.
 
-### PS.04 — Contextual Instruction Priority
+### PS.04 — Contextual Instruction Priority (MCP-Driven)
 
-When performing tasks restricted to a specific feature module, AI MUST prioritize localized instructions over global rules through active discovery.
+When performing tasks restricted to a specific module or package, AI MUST prioritize localized instructions over global rules through active discovery.
 
-#### 1. Dynamic Discovery
+#### 1. Dynamic Discovery via MCP
 
-- **Mandatory Action**: Before starting an implementation plan or refactoring, AI MUST check for localized documentation within the target feature module (e.g., `README.md`, `.prompts/`, local manifesto files).
-- **Goal**: Identify feature-specific conventions, constraints, or overrides that take precedence over global standards.
+- **Mandatory Action**: Before starting an implementation plan or refactoring, AI MUST execute `vk_fe_get_module_context` on the target directory (e.g., `packages/{packageName}`).
+- **Goal**: Identify localized `.prompts/` (e.g., `module-manifest.md`) and Layer 2 manifestos (`research-manifesto.md`).
+- **Token Efficiency**: Do not attempt to guess or remember local rules; trust the MCP tool's output as the primary source of truth for the specific scope.
 
 #### 2. Conflict Resolution Hierarchy
 
-- **Priority**: Local Feature Prompt (Layer 3) > Module Manifesto (Layer 2) > Global Standards (Layer 1).
+- **Priority**: Local Feature Prompt (Layer 3) > Package/Module Manifesto (Layer 2) > Global Standards (Layer 1).
 - **Core Standard Protection**: If a local prompt conflicts with a Core Standard (CS.01–CS.07), the AI MUST explicitly flag this as a **"Standard Violation for Feature/Lab Needs"** in the Implementation Plan for User Review.
 - **Naming Exceptions**: If Layer 2/3 explicitly waives the `VK` prefix or `_internal/` convention, AI MUST follow that exception immediately without further questioning.
+
+### PS.05 — Evidence-Based Structural Modification
+
+AI is strictly prohibited from modifying directory structures, package exports, file names, or component/symbol naming based on memory, assumption, or generic convention.
+
+#### 1. Mandatory L3 Specification Grounding
+
+- **Evidence Requirement**: Any structural refactoring, module blueprint layout modification, or symbol visibility change MUST be grounded in explicit L3 specifications fetched via `vk_fe_get_architectural_rule` (e.g., `MB.01`, `AP.03`, `MB.02`).
+- **No Speculative Naming**: Do not invent folder categories (`utils/`, `helpers/`) without passing the registered subfolder taxonomy or verifying the package manifest.
